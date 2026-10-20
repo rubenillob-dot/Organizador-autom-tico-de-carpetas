@@ -4,9 +4,9 @@ import os
 
 
 def una_dentro_de_otra(ruta_a, ruta_b):
-    """Comprueba si dos rutas son la misma carpeta o si una está dentro de la otra
+    """Compruebo si dos rutas son la misma carpeta o si una está dentro de la otra
 
-    Convierte las rutas a absolutas y añade el separador del sistema
+    Convierto las rutas a absolutas y añade el separador del sistema
     """
     abs_a = os.path.abspath(ruta_a)
     if not abs_a.endswith(os.sep):
@@ -17,3 +17,12 @@ def una_dentro_de_otra(ruta_a, ruta_b):
         abs_b += os.sep
 
     return abs_a.startswith(abs_b) or abs_b.startswith(abs_a)
+
+
+def obtener_extension(archivo):
+    """Devuelvo la extensión de un archivo en minúsculas y sin el .
+    Si el archivo no tiene extensión, devuelve 'sin_extension'
+    """
+    _, extension = os.path.splitext(archivo)
+    extension = extension.lstrip(".").lower()
+    return extension if extension else "sin_extension"
