@@ -30,3 +30,20 @@ def obtener_extension(archivo):
         return "sin_extension"
 
     return extension.lstrip(".").lower()
+
+
+def tamano_legible(tamano_bytes):
+    """Convierto un tamaño en bytes a una unidad legible (bytes, KB, MB o GB)
+    dividiendo entre 1024 mediante un bucle while
+    """
+    unidades = ["bytes", "KB", "MB", "GB"]
+    tamano = float(tamano_bytes)
+    indice = 0
+
+    while tamano >= 1024 and indice < len(unidades) - 1:
+        tamano /= 1024
+        indice += 1
+
+    if indice == 0:
+        return f"{int(tamano)} {unidades[0]}"
+    return f"{tamano:.2f} {unidades[indice]}"
