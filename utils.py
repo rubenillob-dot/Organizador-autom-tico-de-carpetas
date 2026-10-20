@@ -24,5 +24,9 @@ def obtener_extension(archivo):
     Si el archivo no tiene extensión, devuelve 'sin_extension'
     """
     _, extension = os.path.splitext(archivo)
-    extension = extension.lstrip(".").lower()
-    return extension if extension else "sin_extension"
+
+    # Si no tiene extensión devuelvo 'sin_extension'
+    if not extension or extension == ".":
+        return "sin_extension"
+
+    return extension.lstrip(".").lower()
