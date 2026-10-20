@@ -11,5 +11,10 @@ def mostrar_cabecera(consola):
     consola.print(Panel("Organizador de Carpetas", border_style="blue"))
 
 
-if __name__ == "__main__":
+def main():
+    """Punto de entrada principal del programa"""
     mostrar_cabecera(consola)
+
+
+if __name__ == "__main__":
+    main()
