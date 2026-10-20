@@ -26,6 +26,13 @@ def main():
         )
         return
 
+    # Si la ruta de destino existe compruebo que sea una carpeta
+    if os.path.exists(ruta_destino) and not os.path.isdir(ruta_destino):
+        consola.print(
+            Panel("La ruta de destino existe pero no es una carpeta", border_style="red")
+        )
+        return
+
 
 if __name__ == "__main__":
     main()
