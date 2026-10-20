@@ -49,10 +49,6 @@ def validar_rutas(origen, destino, consola):
 def main():
     """Punto de entrada principal del programa."""
     mostrar_cabecera(consola)
-
-    # Print de prueba temporal
-    print(tamano_legible(2048))
-
     ruta_origen = Prompt.ask("Ruta de origen", console=consola)
     ruta_destino = Prompt.ask("Ruta de destino", console=consola)
 
