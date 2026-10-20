@@ -46,4 +46,4 @@ def tamano_legible(tamano_bytes):
 
     if indice == 0:
         return f"{int(tamano)} {unidades[0]}"
-    return f"{tamano:.2f} {unidades[indice]}"
+    return f"{round(tamano, 2)} {unidades[indice]}"
