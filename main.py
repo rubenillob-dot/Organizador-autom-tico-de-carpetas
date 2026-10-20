@@ -2,6 +2,7 @@
 
 from rich.console import Console
 from rich.panel import Panel
+from rich.prompt import Prompt
 
 consola = Console()
 
@@ -14,6 +15,7 @@ def mostrar_cabecera(consola):
 def main():
     """Punto de entrada principal del programa"""
     mostrar_cabecera(consola)
+    ruta_origen = Prompt.ask("[bold cyan]Ruta de origen[/bold cyan]", console=consola)
 
 
 if __name__ == "__main__":
