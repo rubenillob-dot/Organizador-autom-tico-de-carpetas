@@ -1,5 +1,6 @@
 """Módulo principal del organizador automático de carpetas."""
 
+import os
 from rich.console import Console
 from rich.panel import Panel
 from rich.prompt import Prompt
@@ -8,15 +9,22 @@ consola = Console()
 
 
 def mostrar_cabecera(consola):
-    """Muestra el título del programa dentro de un panel azul"""
+    """Muestra el título del programa dentro de un panel azul."""
     consola.print(Panel("Organizador de Carpetas", border_style="blue"))
 
 
 def main():
-    """Punto de entrada principal del programa"""
+    """Punto de entrada principal del programa."""
     mostrar_cabecera(consola)
     ruta_origen = Prompt.ask("Ruta de origen", console=consola)
     ruta_destino = Prompt.ask("Ruta de destino", console=consola)
+
+    # Compruebo que la carpeta origen de verdad existe y si es un directorio
+    if not os.path.isdir(ruta_origen):
+        consola.print(
+            Panel("La carpeta de origen no existe o no es un directorio.", border_style="red")
+        )
+        return
 
 
 if __name__ == "__main__":
