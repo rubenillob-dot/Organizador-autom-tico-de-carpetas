@@ -47,3 +47,21 @@ def tamano_legible(tamano_bytes):
     if indice == 0:
         return f"{int(tamano)} {unidades[0]}"
     return f"{round(tamano, 2)} {unidades[indice]}"
+
+
+def nombre_disponible(destino, nombre_archivo):
+    """Devuelvo un nombre de archivo que no exista en la carpeta del de destino
+
+    Si el archivo ya existe añade un sufijo con el barrabaja antes de la extensión
+    hasta encontrar un nombre libre
+    """
+    nombre_base, extension = os.path.splitext(nombre_archivo)
+    nombre_candidato = nombre_archivo
+    contador = 1
+
+    while os.path.exists(os.path.join(destino, nombre_candidato)):
+        nombre_candidato = f"{nombre_base}_{contador}{extension}"
+        contador += 1
+
+    return nombre_candidato
+
