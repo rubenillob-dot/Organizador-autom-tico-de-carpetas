@@ -66,3 +66,27 @@ def nombre_disponible(destino, nombre_archivo):
 
     return nombre_candidato
 
+
+def clasificar_archivo(ruta_origen, nombre_archivo, ruta_destino, historial):
+    """Clasifico y muevo un archivo a la subcarpeta según su extensión
+
+    Creo la subcarpeta con os.makedirs si no existe, busco un nombre libre
+    para no sobreescribir, muevo el archivo y añado el movimiento al historial
+    """
+    ruta_archivo_origen = os.path.join(ruta_origen, nombre_archivo)
+    tamano = os.path.getsize(ruta_archivo_origen)
+
+    # Obtengo la extensión y la ruta de la subcarpeta destino
+    extension = obtener_extension(nombre_archivo)
+    carpeta_extension = os.path.join(ruta_destino, extension)
+    if not os.path.exists(carpeta_extension):
+        os.makedirs(carpeta_extension)
+
+    nombre_final = nombre_disponible(carpeta_extension, nombre_archivo)
+    ruta_archivo_destino = os.path.join(carpeta_extension, nombre_final)
+
+    shutil.move(ruta_archivo_origen, ruta_archivo_destino)
+    historial.append(f"{nombre_archivo} movido a {extension}/{nombre_final}")
+
+    return tamano
+
