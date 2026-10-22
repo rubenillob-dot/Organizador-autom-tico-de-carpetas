@@ -1,6 +1,7 @@
 """Modulo con funciones para la organización de archivos"""
 
 import os
+import shutil
 
 
 def una_dentro_de_otra(ruta_a, ruta_b):
