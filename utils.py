@@ -82,11 +82,13 @@ def clasificar_archivo(ruta_origen, nombre_archivo, ruta_destino, historial):
     if not os.path.exists(carpeta_extension):
         os.makedirs(carpeta_extension)
 
-    nombre_final = nombre_disponible(carpeta_extension, nombre_archivo)
-    ruta_archivo_destino = os.path.join(carpeta_extension, nombre_final)
+    
+    nombre_libre = nombre_disponible(carpeta_extension, nombre_archivo)
+    ruta_archivo_destino = os.path.join(carpeta_extension, nombre_libre)
 
     shutil.move(ruta_archivo_origen, ruta_archivo_destino)
-    historial.append(f"{nombre_archivo} movido a {extension}/{nombre_final}")
+
+    historial.append(f"{nombre_archivo} movido a {extension}/{nombre_libre}")
 
     return tamano
 
