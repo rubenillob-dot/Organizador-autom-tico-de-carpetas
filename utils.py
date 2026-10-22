@@ -93,3 +93,20 @@ def clasificar_archivo(ruta_origen, nombre_archivo, ruta_destino, historial):
 
     return tamano
 
+
+def clasificar_carpeta_recursivo(origen, destino, historial):
+    """Recorro de forma recursiva una carpeta y clasifico todos sus archivos
+    Si es una subcarpeta me llamo a mí misma y si es un
+    archivo lo clasifico y sumo su tamaño en bytes
+    """
+    total_bytes = 0
+
+    for elemento in os.listdir(origen):
+        ruta_elemento = os.path.join(origen, elemento)
+
+        if os.path.isdir(ruta_elemento):
+            total_bytes += clasificar_carpeta_recursivo(ruta_elemento, destino, historial)
+        elif os.path.isfile(ruta_elemento):
+            total_bytes += clasificar_archivo(origen, elemento, destino, historial)
+
+    return total_bytes
