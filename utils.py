@@ -88,7 +88,8 @@ def clasificar_archivo(ruta_origen, nombre_archivo, ruta_destino, historial):
 
     shutil.move(ruta_archivo_origen, ruta_archivo_destino)
 
-    historial.append(f"{nombre_archivo} movido a {extension}/{nombre_libre}")
+    destino_nuevo = os.path.join(extension, nombre_libre)
+    historial.append(f"{nombre_archivo} a {destino_nuevo}")
 
     return tamano
 
