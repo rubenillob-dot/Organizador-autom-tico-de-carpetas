@@ -11,9 +11,16 @@ import shutil
 
 
 def una_dentro_de_otra(ruta_a, ruta_b):
-    """Compruebo si dos rutas son la misma carpeta o si una está dentro de la otra
+    """Compruebo si dos rutas son la misma carpeta o si una está metida dentro de la otra.
 
-    Convierto las rutas a absolutas y añade el separador del sistema
+    Convierto las rutas a absolutas y les añado la barra final para comparar si coinciden.
+
+    Args:
+        ruta_a (str): Primera ruta a comprobar.
+        ruta_b (str): Segunda ruta a comprobar.
+
+    Returns:
+        bool: True si son la misma carpeta o una contiene a la otra, False si son independientes.
     """
     abs_a = os.path.abspath(ruta_a)
     if not abs_a.endswith(os.sep):
@@ -27,8 +34,15 @@ def una_dentro_de_otra(ruta_a, ruta_b):
 
 
 def obtener_extension(archivo):
-    """Devuelvo la extensión de un archivo en minúsculas y sin el .
-    Si el archivo no tiene extensión, devuelve 'sin_extension'
+    """Saco la extensión de un archivo en minúsculas y sin el punto inicial.
+
+    Si el archivo no tiene ninguna extensión, devuelvo 'sin_extension'.
+
+    Args:
+        archivo (str): Nombre o ruta del archivo.
+
+    Returns:
+        str: La extensión limpia en minúsculas (por ejemplo 'txt', 'png') o 'sin_extension'.
     """
     _, extension = os.path.splitext(archivo)
 
@@ -40,8 +54,15 @@ def obtener_extension(archivo):
 
 
 def tamano_legible(tamano_bytes):
-    """Convierto un tamaño en bytes a una unidad legible (bytes, KB, MB o GB)
-    dividiendo entre 1024 mediante un bucle while
+    """Paso un tamaño en bytes a un formato fácil de leer (bytes, KB, MB o GB).
+
+    Voy dividiendo entre 1024 en un bucle while hasta dar con la unidad adecuada.
+
+    Args:
+        tamano_bytes (int | float): Tamaño del archivo en bytes.
+
+    Returns:
+        str: Cadena formateada con el valor redondeado y su unidad (por ejemplo '2.5 MB').
     """
     unidades = ["bytes", "KB", "MB", "GB"]
     tamano = float(tamano_bytes)
@@ -57,10 +78,16 @@ def tamano_legible(tamano_bytes):
 
 
 def nombre_disponible(destino, nombre_archivo):
-    """Devuelvo un nombre de archivo que no exista en la carpeta del de destino
+    """Busco un nombre que no exista todavía en la carpeta de destino para no sobrescribir nada.
 
-    Si el archivo ya existe añade un sufijo con el barrabaja antes de la extensión
-    hasta encontrar un nombre libre
+    Si el nombre ya está pillado, le voy añadiendo sufijos como '_1', '_2', etc., antes de la extensión.
+
+    Args:
+        destino (str): Carpeta donde se va a guardar el archivo.
+        nombre_archivo (str): Nombre original del archivo que queremos mover.
+
+    Returns:
+        str: Nombre final disponible para usar sin machacar otro archivo.
     """
     nombre_base, extension = os.path.splitext(nombre_archivo)
     nombre_candidato = nombre_archivo
@@ -74,10 +101,19 @@ def nombre_disponible(destino, nombre_archivo):
 
 
 def clasificar_archivo(ruta_origen, nombre_archivo, ruta_destino, historial):
-    """Clasifico y muevo un archivo a la subcarpeta según su extensión
+    """Muevo un archivo a su subcarpeta correspondiente según su extensión.
 
-    Creo la subcarpeta con os.makedirs si no existe, busco un nombre libre
-    para no sobreescribir, muevo el archivo y añado el movimiento al historial
+    Crea la subcarpeta si hace falta, busca un nombre que no colisione,
+    mueve el fichero con shutil, anota la acción en el historial y devuelve lo que ocupaba.
+
+    Args:
+        ruta_origen (str): Carpeta donde está el archivo actualmente.
+        nombre_archivo (str): Nombre del archivo a mover.
+        ruta_destino (str): Carpeta destino principal donde se organizará.
+        historial (list): Lista donde voy guardando los movimientos realizados.
+
+    Returns:
+        int: Tamaño en bytes del archivo que se ha movido.
     """
     ruta_archivo_origen = os.path.join(ruta_origen, nombre_archivo)
     tamano = os.path.getsize(ruta_archivo_origen)
@@ -101,9 +137,18 @@ def clasificar_archivo(ruta_origen, nombre_archivo, ruta_destino, historial):
 
 
 def clasificar_carpeta_recursivo(origen, destino, historial):
-    """Recorro de forma recursiva una carpeta y clasifico todos sus archivos
-    Si es una subcarpeta me llamo a mí misma y si es un
-    archivo lo clasifico y sumo su tamaño en bytes
+    """Recorro una carpeta entera de forma recursiva clasificando todos los archivos que encuentre.
+
+    Si encuentro una subcarpeta me vuelvo a llamar a mí misma con esa ruta,
+    y si es un archivo lo clasifico y voy sumando los bytes que ocupa.
+
+    Args:
+        origen (str): Ruta de la carpeta que quiero organizar.
+        destino (str): Ruta de la carpeta donde se van a mover clasificados.
+        historial (list): Lista donde se va registrando cada movimiento.
+
+    Returns:
+        int: Total de bytes movidos en todo el proceso.
     """
     bytes_movidos = 0
 
@@ -119,7 +164,15 @@ def clasificar_carpeta_recursivo(origen, destino, historial):
 
 
 def contar_archivos_recursivo(ruta):
-    """Recorro de forma recursiva una carpeta y cuento todos sus archivos
+    """Recorro una carpeta y todas sus subcarpetas para contar cuántos archivos contiene en total.
+
+    Si encuentro una subcarpeta hago una llamada recursiva, y si es un archivo sumo 1.
+
+    Args:
+        ruta (str): Ruta de la carpeta a inspeccionar.
+
+    Returns:
+        int: Número total de archivos encontrados en la carpeta y subcarpetas.
     """
     if not os.path.exists(ruta) or not os.path.isdir(ruta):
         return 0
@@ -135,4 +188,3 @@ def contar_archivos_recursivo(ruta):
             total_archivos += contar_archivos_recursivo(ruta_elemento)
 
     return total_archivos
-
