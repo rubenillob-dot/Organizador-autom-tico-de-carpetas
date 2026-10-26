@@ -104,9 +104,9 @@ def clasificar_carpeta_recursivo(origen, destino, historial):
     for elemento in os.listdir(origen):
         ruta_elemento = os.path.join(origen, elemento)
 
-        if os.path.isdir(ruta_elemento):
-            bytes_movidos += clasificar_carpeta_recursivo(ruta_elemento, destino, historial)
-        elif os.path.isfile(ruta_elemento):
+        if os.path.isfile(ruta_elemento):
             bytes_movidos += clasificar_archivo(origen, elemento, destino, historial)
+        elif os.path.isdir(ruta_elemento):
+            bytes_movidos += clasificar_carpeta_recursivo(ruta_elemento, destino, historial)
 
     return bytes_movidos
