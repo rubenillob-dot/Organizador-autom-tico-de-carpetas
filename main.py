@@ -85,7 +85,10 @@ def main():
         return
 
     historial_movimientos = []
-    bytes_movidos = clasificar_carpeta_recursivo(ruta_origen, ruta_destino, historial_movimientos)
+    with consola.status("[bold green]Clasificando..."):
+        bytes_movidos = clasificar_carpeta_recursivo(
+            ruta_origen, ruta_destino, historial_movimientos
+        )
     archivos_origen = contar_archivos_recursivo(ruta_origen)
     archivos_destino = contar_archivos_recursivo(ruta_destino)
 
