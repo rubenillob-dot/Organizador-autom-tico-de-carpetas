@@ -57,6 +57,8 @@ def mostrar_informe(historial, bytes_movidos, archivos_origen, archivos_destino,
     tabla = Table(title="Resumen del proceso")
     tabla.add_column("Concepto")
     tabla.add_column("Valor")
+    tabla.add_row("Archivos movidos", str(len(historial)))
+    tabla.add_row("Tamaño total", tamano_legible(bytes_movidos))
 
 
 def main():
