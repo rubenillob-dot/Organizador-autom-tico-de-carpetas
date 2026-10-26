@@ -1,4 +1,11 @@
-"""Módulo principal del organizador automático de carpetas."""
+"""Módulo principal del organizador automático de carpetas.
+
+Gestiona la interfaz de usuario por consola mediante la librería Rich.
+Muestro la cabecera, solicito y compruebo las rutas de origen
+y destino y enseño el resultado
+mediante tablas con las estadísticas y el
+historial de movimientos realizados.
+"""
 
 import os
 from rich.console import Console

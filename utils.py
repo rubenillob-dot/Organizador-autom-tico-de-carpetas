@@ -1,4 +1,10 @@
-"""Modulo con funciones para la organización de archivos"""
+"""Funciones auxiliares para la organización de archivos.
+
+Aquí guardo las funciones para validar rutas, sacar extensiones,
+convertir tamaños a unidades legibles, evitar que se sobrescriban
+archivos repetidos y recorrer las carpetas de forma recursiva para
+clasificar y contar los archivos.
+"""
 
 import os
 import shutil
