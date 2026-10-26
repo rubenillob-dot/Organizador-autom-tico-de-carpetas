@@ -155,8 +155,10 @@ def clasificar_carpeta_recursivo(origen, destino, historial):
     for elemento in os.listdir(origen):
         ruta_elemento = os.path.join(origen, elemento)
 
+        # CASO BASE: si es un archivo normal, lo muevo y sumo los bytes
         if os.path.isfile(ruta_elemento):
             bytes_movidos += clasificar_archivo(origen, elemento, destino, historial)
+        # CASO RECURSIVO: si es una subcarpeta, entro en ella volviendo a llamar a la función
         elif os.path.isdir(ruta_elemento):
             bytes_movidos += clasificar_carpeta_recursivo(ruta_elemento, destino, historial)
 
@@ -182,8 +184,10 @@ def contar_archivos_recursivo(ruta):
     for elemento in os.listdir(ruta):
         ruta_elemento = os.path.join(ruta, elemento)
 
+        # CASO BASE: si es un archivo, sumamos 1 al contador
         if os.path.isfile(ruta_elemento):
             total_archivos += 1
+        # CASO RECURSIVO: si es otra carpeta, nos metemos dentro a contar sus archivos
         elif os.path.isdir(ruta_elemento):
             total_archivos += contar_archivos_recursivo(ruta_elemento)
 
