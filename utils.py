@@ -110,3 +110,23 @@ def clasificar_carpeta_recursivo(origen, destino, historial):
             bytes_movidos += clasificar_carpeta_recursivo(ruta_elemento, destino, historial)
 
     return bytes_movidos
+
+
+def contar_archivos_recursivo(ruta):
+    """Recorro de forma recursiva una carpeta y cuento todos sus archivos
+    """
+    if not os.path.exists(ruta) or not os.path.isdir(ruta):
+        return 0
+
+    total_archivos = 0
+
+    for elemento in os.listdir(ruta):
+        ruta_elemento = os.path.join(ruta, elemento)
+
+        if os.path.isfile(ruta_elemento):
+            total_archivos += 1
+        elif os.path.isdir(ruta_elemento):
+            total_archivos += contar_archivos_recursivo(ruta_elemento)
+
+    return total_archivos
+
