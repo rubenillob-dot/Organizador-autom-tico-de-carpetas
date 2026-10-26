@@ -60,6 +60,13 @@ def mostrar_informe(historial, bytes_movidos, archivos_origen, archivos_destino,
     tabla.add_row("Archivos movidos", str(len(historial)))
     tabla.add_row("Tamaño total", tamano_legible(bytes_movidos))
 
+    tabla_historial = Table(title="Historial de movimientos")
+    tabla_historial.add_column("Nº")
+    tabla_historial.add_column("Origen -> Destino")
+
+    for i, movimiento in enumerate(historial, 1):
+        tabla_historial.add_row(str(i), movimiento)
+
 
 def main():
     """Punto de entrada principal del programa."""
