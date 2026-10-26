@@ -55,6 +55,9 @@ def main():
     if not validar_rutas(ruta_origen, ruta_destino, consola):
         return
 
+    historial_movimientos = []
+
+
 
 if __name__ == "__main__":
     main()
