@@ -4,7 +4,12 @@ import os
 from rich.console import Console
 from rich.panel import Panel
 from rich.prompt import Prompt
-from utils import una_dentro_de_otra, tamano_legible, clasificar_carpeta_recursivo
+from utils import (
+    una_dentro_de_otra,
+    tamano_legible,
+    clasificar_carpeta_recursivo,
+    contar_archivos_recursivo,
+)
 
 consola = Console()
 
@@ -57,6 +62,8 @@ def main():
 
     historial_movimientos = []
     bytes_movidos = clasificar_carpeta_recursivo(ruta_origen, ruta_destino, historial_movimientos)
+    archivos_origen = contar_archivos_recursivo(ruta_origen)
+    archivos_destino = contar_archivos_recursivo(ruta_destino)
 
 
 
