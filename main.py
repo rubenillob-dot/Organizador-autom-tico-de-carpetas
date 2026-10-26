@@ -4,6 +4,7 @@ import os
 from rich.console import Console
 from rich.panel import Panel
 from rich.prompt import Prompt
+from rich.table import Table
 from utils import (
     una_dentro_de_otra,
     tamano_legible,
@@ -49,6 +50,13 @@ def validar_rutas(origen, destino, consola):
         return False
 
     return True
+
+
+def mostrar_informe(historial, bytes_movidos, archivos_origen, archivos_destino, consola):
+    """Muestro el informe final con los resultados de la organización"""
+    tabla = Table(title="Resumen del proceso")
+    tabla.add_column("Concepto")
+    tabla.add_column("Valor")
 
 
 def main():
